@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Issue - Trip Expense Splitter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{font-family:'Inter',sans-serif;background-attachment:fixed;transition:all .3s ease;position:relative}body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at 20% 20%,rgba(128,0,128,.3),transparent 40%),radial-gradient(circle at 80% 30%,rgba(0,0,255,.3),transparent 40%),radial-gradient(circle at 30% 80%,rgba(255,105,180,.3),transparent 40%),radial-gradient(circle at 70% 70%,rgba(0,255,255,.3),transparent 40%);background-size:200% 200%;animation:moveDots 25s linear infinite;transition:opacity .5s ease}
+        @keyframes moveDots{0%{background-position:0 0}50%{background-position:100% 100%}100%{background-position:0 0}}
+        body{background-color:#f3f4f6;color:#1f2937}body.light::before{opacity:.4}.main-container{background-color:white;border:1px solid #e5e7eb;color:#1f2937}
+        input, select, textarea {background-color: white; color: #1f2937; border-color: #e5e7eb;}
+        body.dark{background-color:#111827;color:#d1d5db}body.dark::before{opacity:1}body.dark .main-container{backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);background-color:rgba(31,41,55,.5);border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px 0 rgba(0,0,0,.2);color:#d1d5db}
+        body.dark .text-gray-900{color:#d1d5db}body.dark .text-gray-700{color:#d1d5db}
+        body.dark input, body.dark select, body.dark textarea {background-color: #1f2937; color: #d1d5db; border-color: #4b5563;}
+        .switch{position:relative;display:inline-block;width:60px;height:34px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#4b5563;transition:.4s;border-radius:34px}.slider:before{position:absolute;content:"";height:26px;width:26px;left:4px;bottom:4px;background-color:white;transition:.4s;border-radius:50%}input:checked+.slider{background-color:#2196F3}input:checked+.slider:before{transform:translateX(26px)}
+        .active-link {background-color: #3b82f6 !important; color: #ffffff !important;} .active-link:hover { background-color: #2563eb !important;}
+    </style>
+</head>
+<body class="p-4 sm:p-8 pb-24 pt-24">
+
+    <!-- Fixed Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-gray-200 dark:border-white/10 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="font-bold text-xl text-gray-900 dark:text-white">Trip Expense Splitter</a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden sm:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="report.html" class="px-3 py-2 rounded-md text-sm font-medium active-link">Report Issue</a>
+                        <a href="terms.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Terms</a>
+                        <a href="privacy.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Privacy</a>
+                        <a href="misuse.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Acceptable Use</a>
+                    </div>
+                </div>
+                 <div class="sm:hidden">
+                    <!-- A hamburger icon could go here for a mobile menu -->
+                </div>
+            </div>
+        </div>
+    </nav>
+<br>
+<br>
+    <div class="max-w-4xl mx-auto main-container p-6 sm:p-8 rounded-2xl shadow-xl">
+        <div class="mb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Report an Issue</h1>
+        </div>
+        
+        <div id="formContainer" class="text-gray-700 space-y-4">
+            <p>Found a bug or have an issue? We are sorry for the inconvenience. Please describe the problem in detail below. Your report will be sent directly to our team.</p>
+
+            <form id="reportForm" action="https://formsubmit.co/dwarkvyn.report@gmail.com" method="POST" class="space-y-4 pt-4">
+                
+                <input type="hidden" name="_subject" value="New Report - Trip Expense Splitter">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <div>
+                    <label for="reportName" class="block text-sm font-medium text-gray-900">Your Name</label>
+                    <input type="text" id="reportName" name="Name" required class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                </div>
+                <div>
+                    <label for="reportEmail" class="block text-sm font-medium text-gray-900">Your Email (for follow-up)</label>
+                    <input type="email" id="reportEmail" name="Email" required class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                </div>
+                <div>
+                    <label for="platformType" class="block text-sm font-medium text-gray-900">Platform</label>
+                     <select id="platformType" name="Platform" required class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                         <option>Website</option>
+                         <option>Android App</option>
+                     </select>
+                </div>
+                <div>
+                    <label for="issueType" class="block text-sm font-medium text-gray-900">Type of Issue</label>
+                     <select id="issueType" name="Issue_Type" required class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                         <option>Bug / Error</option>
+                         <option>Calculation Problem</option>
+                         <option>PDF Generation Issue</option>
+                         <option>Feature Suggestion</option>
+                         <option>Other</option>
+                     </select>
+                </div>
+                <div>
+                    <label for="reportDescription" class="block text-sm font-medium text-gray-900">Description of Issue</label>
+                    <textarea id="reportDescription" name="Description" rows="5" required placeholder="Please describe the steps to reproduce the issue..." class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition-colors"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105">
+                    Submit Report
+                </button>
+            </form>
+        </div>
+        
+        <!-- Thank You Message Container -->
+        <div id="thankYouMessage" class="hidden text-center py-10">
+            <svg class="mx-auto mb-4 w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h2 class="text-2xl font-bold mb-2 text-gray-900">Thank You!</h2>
+            <p class="text-gray-700">Your report has been submitted successfully. We appreciate your feedback.</p>
+            <div class="pt-4">
+                <button id="sendAnotherReportBtn" class="bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 inline-block">
+                    Submit Another Report
+                </button>
+            </div>
+        </div>
+
+        <!-- Error message container, hidden by default -->
+        <div id="errorMessage" class="hidden text-center text-red-500 mt-4">
+            <p>Oops! Something went wrong while sending your report. Please try again later.</p>
+        </div>
+
+    </div>
+    
+    <div id="themeToggle" class="fixed bottom-5 right-5 z-50 p-2 rounded-full cursor-pointer bg-white/30 dark:bg-black/30 backdrop-blur-md transition-all duration-500 flex items-center justify-center space-x-2">
+        <svg id="sunIcon" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <label class="switch">
+            <input type="checkbox" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+        <svg id="moonIcon" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </div>
+    
+    <script>
+        // --- Theme Switcher Logic (No changes here) ---
+        const themeCheckbox = document.getElementById('theme-checkbox');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                if (themeCheckbox) themeCheckbox.checked = true;
+                if(sunIcon && moonIcon) {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            } else {
+                document.body.classList.remove('dark');
+                if (themeCheckbox) themeCheckbox.checked = false;
+                if(moonIcon && sunIcon) {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                }
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        if (themeCheckbox) {
+            themeCheckbox.addEventListener('change', () => {
+                const newTheme = themeCheckbox.checked ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        }
+
+        // --- AJAX Form Submission Logic ---
+        const formContainer = document.getElementById('formContainer');
+        const reportForm = document.getElementById('reportForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitButton = reportForm.querySelector('button[type="submit"]');
+        const sendAnotherReportBtn = document.getElementById('sendAnotherReportBtn');
+
+        reportForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Submitting...`;
+
+            const formData = new FormData(reportForm);
+            const action = reportForm.getAttribute('action');
+
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    formContainer.classList.add('hidden');
+                    thankYouMessage.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
+                } else {
+                    throw new Error('Oops! There was a problem submitting your form. Please try again.');
+                }
+            }).catch(error => {
+                console.error('Submission Error:', error);
+                errorMessage.querySelector('p').textContent = error.message;
+                errorMessage.classList.remove('hidden');
+            }).finally(() => {
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+            });
+        });
+
+        sendAnotherReportBtn.addEventListener('click', () => {
+            thankYouMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            reportForm.reset();
+            formContainer.classList.remove('hidden');
+        });
+        
+    </script>
+    
+    <footer class="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
+        <p class="mb-2">
+            <a href="contact.html" class="text-blue-500 hover:underline">Contact Us</a> | 
+            <a href="report.html" class="text-blue-500 hover:underline">Report an Issue</a>
+        </p>
+        <p class="mb-1">Copyright © 2025 DevBhoomi. All Rights Reserved.</p>
+        <p>Designed with ❤️ in  DevBhoomi Uttarakhand</p>
+    </footer>
+</body>
+</html>
+

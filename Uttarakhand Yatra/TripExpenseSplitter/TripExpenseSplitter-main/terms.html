@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Trip Expense Splitter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body{font-family:'Inter',sans-serif;background-attachment:fixed;transition:all .3s ease;position:relative}body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:radial-gradient(circle at 20% 20%,rgba(128,0,128,.3),transparent 40%),radial-gradient(circle at 80% 30%,rgba(0,0,255,.3),transparent 40%),radial-gradient(circle at 30% 80%,rgba(255,105,180,.3),transparent 40%),radial-gradient(circle at 70% 70%,rgba(0,255,255,.3),transparent 40%);background-size:200% 200%;animation:moveDots 25s linear infinite;transition:opacity .5s ease}
+        @keyframes moveDots{0%{background-position:0 0}50%{background-position:100% 100%}100%{background-position:0 0}}
+        body{background-color:#f3f4f6;color:#1f2937}body.light::before{opacity:.4}.main-container{background-color:white;border:1px solid #e5e7eb;color:#1f2937}
+        body.dark{background-color:#111827;color:#d1d5db}body.dark::before{opacity:1}body.dark .main-container{backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);background-color:rgba(31,41,55,.5);border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px 0 rgba(0,0,0,.2);color:#d1d5db}
+        body.dark .text-gray-900{color:#d1d5db}body.dark .text-gray-700{color:#d1d5db}
+        .switch{position:relative;display:inline-block;width:60px;height:34px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#4b5563;transition:.4s;border-radius:34px}.slider:before{position:absolute;content:"";height:26px;width:26px;left:4px;bottom:4px;background-color:white;transition:.4s;border-radius:50%}input:checked+.slider{background-color:#2196F3}input:checked+.slider:before{transform:translateX(26px)}
+        .active-link {background-color: #3b82f6 !important; color: #ffffff !important;} .active-link:hover { background-color: #2563eb !important;}
+    </style>
+</head>
+<body class="p-4 sm:p-8 pb-24 pt-24">
+
+    <!-- Fixed Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/30 dark:bg-black/30 border-b border-gray-200 dark:border-white/10 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="font-bold text-xl text-gray-900 dark:text-white">Trip Expense Splitter</a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden sm:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="report.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Report Issue</a>
+                        <a href="terms.html" class="px-3 py-2 rounded-md text-sm font-medium active-link">Terms</a>
+                        <a href="privacy.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Privacy</a>
+                        <a href="misuse.html" class="text-gray-700 dark:text-gray-300 hover:bg-gray-500/20 px-3 py-2 rounded-md text-sm font-medium">Acceptable Use</a>
+                    </div>
+                </div>
+                 <div class="sm:hidden">
+                    <!-- A hamburger icon could go here for a mobile menu -->
+                </div>
+            </div>
+        </div>
+    </nav>
+<br>
+<br>
+    <div class="max-w-4xl mx-auto main-container p-6 sm:p-8 rounded-2xl shadow-xl">
+        <div class="mb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Terms and Conditions</h1>
+        </div>
+
+        <div class="prose dark:prose-invert max-w-none text-gray-700 space-y-4">
+            <p><strong>Last Updated:</strong> 15 December 2025</p>
+            <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the Expense Splitter web application and mobile application (the "Service") operated by Dwarkvyn ("us", "we", or "our").</p>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">1. Acceptance of Terms</h2>
+            <p>By accessing or using the Service, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Service.</p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">2. Description of Service</h2>
+            <p>The Service is a client-side tool designed to help users track and split expenses. All data entered into the Service is stored locally on the user's device and is not collected or stored by us.</p>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">3. Use of Service</h2>
+            <p>You agree to use the Service only for its intended purpose. You are responsible for the accuracy of the data you enter and for maintaining backups of your data. We are not responsible for any data loss that may occur.</p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">4. Disclaimer of Warranty</h2>
+            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis, without warranties of any kind, whether express or implied, including, but not to, implied warranties of merchantability or fitness for a particular purpose. Dwarkvyn does not warrant that the Service will function uninterrupted or that any errors will be corrected.</p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">5. Limitation of Liability</h2>
+            <p>In no event shall Dwarkvyn be liable for any indirect, incidental, special, or consequential damages, including loss of data, resulting from your use of or inability to use the Service.</p>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">6. Termination</h2>
+            <p>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. However, as the Service runs locally on your device, this clause primarily applies to any future online services we may offer.</p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">7. Governing Law</h2>
+            <p>These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions.</p>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">8. Changes</h2>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+            
+            <h2 class="text-2xl font-bold text-gray-900 mt-6">Contact Us</h2>
+            <p>If you have any questions about these Terms, please contact us at <a href="tripservice1@gmail.com" class="text-blue-500 hover:underline">tripservice1@gmail.com</a>.</p>
+        </div>
+    </div>
+    
+    <div id="themeToggle" class="fixed bottom-5 right-5 z-50 p-2 rounded-full cursor-pointer bg-white/30 dark:bg-black/30 backdrop-blur-md transition-all duration-500 flex items-center justify-center space-x-2">
+        <svg id="sunIcon" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <label class="switch">
+            <input type="checkbox" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+        <svg id="moonIcon" class="h-6 w-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+    </div>
+
+    <script>
+        const themeCheckbox = document.getElementById('theme-checkbox');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                if (themeCheckbox) themeCheckbox.checked = true;
+                if(sunIcon && moonIcon) {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            } else {
+                document.body.classList.remove('dark');
+                if (themeCheckbox) themeCheckbox.checked = false;
+                if(moonIcon && sunIcon) {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                }
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        if (themeCheckbox) {
+            themeCheckbox.addEventListener('change', () => {
+                const newTheme = themeCheckbox.checked ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        }
+    </script>
+    
+    <footer class="mt-10 text-center text-sm text-gray-500 dark:text-gray-400">
+        <p class="mb-2">
+            <a href="contact.html" class="text-blue-500 hover:underline">Contact Us</a> | 
+            <a href="report.html" class="text-blue-500 hover:underline">Report an Issue</a>
+        </p>
+        <p class="mb-1">Copyright © 2025 DevBhoomi. All Rights Reserved.</p>
+        <p>Designed with ❤️ in DevBhoomi Uttarakhand</p>
+    </footer>
+</body>
+</html>

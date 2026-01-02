@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features – Uttarakhand Yatra</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="destination.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="brand-sidebar">
+            <i class="fas fa-mountain"></i>
+            <span>Uttarakhand Yatra</span>
+        </div>
+        <button class="sidebar-toggle" id="sidebarClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="features.html" class="nav-item active">
+            <i class="fas fa-star"></i>
+            <span>Features</span>
+        </a>
+        <a href="destination.html" class="nav-item">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Destination Explorer</span>
+        </a>
+        <a href="live-weather.html" class="nav-item">
+            <i class="fas fa-cloud-sun"></i>
+            <span>Live Weather</span>
+        </a>
+        <a href="TripExpenseSplitter/TripExpenseSplitter-main/index.html" class="nav-item">
+            <i class="fas fa-calculator"></i>
+            <span>Expense Splitter</span>
+        </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-info">
+            <i class="fas fa-info-circle"></i>
+            <p>Explore Devbhoomi</p>
+        </div>
+    </div>
+</aside>
+
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-btn" id="mobileMenuBtn">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-brand">Uttarakhand Yatra</div>
+    <div class="nav-links">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="index.html#explore-tab" class="nav-btn">Explore</a>
+       <a href="features.html" class="nav-btn active">Features</a>
+        <a href="planner.html" class="nav-btn">Plan Trip</a>
+         
+    </div>
+</nav>
+
+<!-- FEATURES SECTION -->
+<section class="features-section">
+    <h2 class="section-title">Our Features</h2>
+    <p class="section-subtitle">
+        Explore powerful tools to plan your perfect Uttarakhand journey
+    </p>
+
+    <div class="features-grid">
+
+        <div class="feature-box" onclick="window.location.href='destination.html'">
+            <h3>📍 Destination Explorer</h3>
+            <p>Discover famous places, temples, hills & valleys</p>
+        </div>
+        
+        <div class="feature-box" onclick="window.location.href='planner.html'">
+            <h3>🧭 Trip Planner</h3>
+            <p>Create customized itineraries day by day</p>
+        </div>
+
+        <div class="feature-box" onclick="window.location.href='live-weather.html'">
+            <h3>🌦 Live Weather</h3>
+            <p>Check current & forecast weather for destinations</p>
+        </div>
+
+        <div class="feature-box" onclick="window.open('https://www.makemytrip.com', '_blank')">
+            <h3>🧾 Direct Booking</h3>
+            <p>Instantly book hotels, homestays, and travel services at the best prices</p>
+        </div>
+
+        <div class="feature-box" onclick="window.location.href='TripExpenseSplitter/TripExpenseSplitter-main/index.html'">
+            <h3>💰 Money Splitter</h3>
+            <p>Split trip expenses among friends & family</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ppt-footer">
+    © 2025 Uttarakhand Yatra | All Rights Reserved
+</footer>
+
+<script>
+// Sidebar Toggle for Mobile
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const sidebarCloseBtn = document.getElementById('sidebarClose');
+const sidebar = document.getElementById('sidebar');
+
+mobileMenuBtn.addEventListener('click', () => {
+    sidebar.classList.add('active');
+});
+
+sidebarCloseBtn.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+});
+
+// Close sidebar when clicking outside on mobile
+document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 1024) {
+        if (!e.target.closest('.sidebar') && !e.target.closest('.mobile-menu-btn')) {
+            sidebar.classList.remove('active');
+        }
+    }
+});
+
+// Close sidebar when navigating to a page
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+        if (window.innerWidth <= 1024) {
+            sidebar.classList.remove('active');
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible Uttarakhand Trip Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Uttarakhand Yatra </div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-tab="home">Home</button>
+            <button class="nav-btn" data-tab="explore">Explore</button>
+              <a href="features.html" class="nav-btn">Features</a>
+            <a href="planner.html" class="nav-btn">Plan Trip</a>
+           
+        </div>
+    </nav>
+
+    <div class="tab-content" id="home-tab">
+        <div class="hero-section">
+            <div class="slideshow-container">
+                <div class="slide active"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+                <div class="slide"></div>
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Incredible Uttarakhand Trip Planner</h1>
+                <p class="hero-subtitle">Explore the divine landscapes of Uttarakhand</p>
+                <div class="search-container">
+                    <input type="text" id="home-search" class="search-input" placeholder="Search your dream destination...">
+                    <button id="home-search-btn" class="search-btn">Explore</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="popular-section">
+            <h2 class="section-title">Popular Destinations</h2>
+            <div class="destinations-grid" id="popular-destinations">
+                <div class="destination-card" data-city="Kedarnath">
+                    <div class="dest-image" style="background-image: url('https://wallpapers.com/images/hd/kedarnath-1079-x-913-background-wnriqp3fnqm0ri7z.jpg')"></div>
+                    <div class="dest-info">
+                        <h3>Kedarnath</h3>
+                        <p>Where devotion meets the mighty Himalayas</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Badrinath">
+                    <div class="dest-image" style="background-image: url('https://www.savaari.com/blog/wp-content/uploads/2023/05/Badrinath_temple_DSCN9998.webp')"></div>
+                    <div class="dest-info">
+                        <h3>Badrinath</h3>
+                        <p>A sacred haven on the banks of Alaknanda</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Haridwar">
+                    <div class="dest-image" style="background-image: url('https://www.postoast.com/wp-content/uploads/2016/07/Ganga-Aarti-At-Har-ki-Pauri-Haridwar.jpg')"></div>
+                    <div class="dest-info">
+                        <h3>Haridwar</h3>
+                        <p>Gateway to the land of gods</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Mussoorie">
+                    <div class="dest-image" style="background-image: url('https://static-blog.treebo.com/blog/wp-content/uploads/2017/06/The-Mall-Road.jpg')"></div>
+                    <div class="dest-info">
+                        <h3>Mussoorie</h3>
+                        <p>The Queen of Hills</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Nainital">
+                    <div class="dest-image" style="background-image: url('https://th.bing.com/th/id/OIP.5B4hLybrfWQ639g6JH7J5AHaEc?w=308&h=184&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3')"></div>
+                    <div class="dest-info">
+                        <h3>Nainital</h3>
+                        <p>A serene lake town embraced by mountains</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Auli">
+                    <div class="dest-image" style="background-image: url('https://th.bing.com/th/id/R.be4d22cea705f9c0a34d4dab48d688f0?rik=rK%2bdemEsQua1qg&riu=http%3a%2f%2fwww.bontravelindia.com%2fwp-content%2fuploads%2f2022%2f10%2fAuli-in-Winters.jpg&ehk=f7ReAKacGU0GWYH1oLpqlzS5Jd7LHowNTvyPx5klGBw%3d&risl=&pid=ImgRaw&r=0')"></div>
+                    <div class="dest-info">
+                        <h3>Auli</h3>
+                        <p>India’s premier skiing destination</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Jim Corbett National Park">
+                    <div class="dest-image" style="background-image: url('https://th.bing.com/th/id/OIP.T-mSNT3mv7Bf71FJlhzoqQHaEq?w=260&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3')"></div>
+                    <div class="dest-info">
+                        <h3>Jim Corbett National Park</h3>
+                        <p>Into the wild heart of Uttarakhand</p>
+                    </div>
+                </div>
+                <div class="destination-card" data-city="Manali">
+                    <div class="dest-image" style="background-image: url('https://th.bing.com/th/id/OIP.UpgvFH1GlQlSjKenyMdwQQHaEK?w=259&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3')"></div>
+                    <div class="dest-info">
+                        <h3>Manali</h3>
+                        <p>Himalayan haven for adventurers</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+  </div>
+
+    <div class="tab-content hidden" id="explore-tab">
+        <div class="explore-container">
+            <div class="explore-header">
+                <h2>Explore Destinations</h2>
+                <div class="explore-search-container">
+                    <input type="text" id="explore-search" class="search-input" placeholder="Enter destination name...">
+                    <button id="explore-search-btn" class="search-btn">Search</button>
+                </div>
+            </div>
+            <div id="explore-results" class="explore-results"></div>
+        </div>
+    </div>
+
+    <div class="tab-content hidden" id="trips-tab">
+        <div class="trips-container">
+            <h2>My Saved Trips</h2>
+            <div id="saved-trips" class="saved-trips-grid"></div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+ 

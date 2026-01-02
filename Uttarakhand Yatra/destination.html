@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Explorer - Uttarakhand Yatra</title>
+    <link rel="stylesheet" href="destination.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="destination-page">
+    <!-- Left Feature Navigation Panel -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-sidebar">
+                <i class="fas fa-mountain"></i>
+                <span>Uttarakhand Yatra</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="features.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>Features</span>
+            </a>
+            <a href="destination.html" class="nav-item active">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Destination Explorer</span>
+            </a>
+            <a href="live-weather.html" class="nav-item">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Live Weather</span>
+            </a>
+            <a href="TripExpenseSplitter/TripExpenseSplitter-main/index.html" class="nav-item">
+                <i class="fas fa-calculator"></i>
+                <span>Money Splitter</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="sidebar-info">
+                <i class="fas fa-info-circle"></i>
+                <p>Explore Devbhoomi</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Right Side Navigation Bar -->
+    <nav class="right-navbar">
+        <a href="index.html" class="nav-item-right">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="features.html" class="nav-item-right">
+            <i class="fas fa-star"></i>
+            <span>Explore</span>
+        </a>
+        <a href="planner.html" class="nav-item-right">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Plan Trip</span>
+        </a>
+        <a href="features.html" class="nav-item-right active">
+            <i class="fas fa-star"></i>
+            <span>Features</span>
+        </a>
+        <a href="index.html#trips-tab" class="nav-item-right">
+            <i class="fas fa-heart"></i>
+            <span>My Trips</span>
+        </a>
+    </nav>
+
+    <div class="main-content-wrapper">
+            <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="features.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back 
+            </a>
+        </div>
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="brand">
+                    <i class="fas fa-mountain"></i>
+                    <span>Uttarakhand Yatra</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Destination Explorer</h1>
+                <p class="hero-subtitle">Search cities and discover the best tourist places in Uttarakhand</p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="citySearch" 
+                            class="search-input" 
+                            placeholder="Search city or town (e.g. Dehradun, Mussoorie)"
+                            autocomplete="off"
+                        >
+                        <button class="search-btn" id="searchBtn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Left Side - Tourist Places Grid -->
+                <div class="places-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-map-pin"></i>
+                            <span id="cityName">Popular Destinations</span>
+                        </h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">
+                                <i class="fas fa-globe"></i> All
+                            </button>
+                            <button class="filter-btn" data-filter="temple">
+                                <i class="fas fa-place-of-worship"></i> Temples
+                            </button>
+                            <button class="filter-btn" data-filter="waterfall">
+                                <i class="fas fa-water"></i> Waterfalls
+                            </button>
+                            <button class="filter-btn" data-filter="viewpoint">
+                                <i class="fas fa-mountain"></i> Viewpoints
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="places-grid" id="placesGrid">
+                        <!-- Places will be loaded dynamically -->
+                        <div class="placeholder-card">
+                            <i class="fas fa-search-location"></i>
+                            <p>Search for a city or town to explore destinations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Interactive Map -->
+                <div class="map-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-map-marked-alt"></i> Interactive Map
+                        </h2>
+                    </div>
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Uttarakhand Yatra. Explore the beauty of Devbhoomi.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-a7mRwECSCAcLZsyi_4by9O5fKVq7fUs&callback=initMap" async defer></script>
+    <script src="destination.js"></script>
+    <script src="destination-explorer.js"></script>
+
+</body>
+</html>

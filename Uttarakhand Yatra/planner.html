@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner – Uttarakhand Yatra</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #8a2be2;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-accent: #f0f4f8;
+            --border-color: #e1e5e9;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --error-color: #dc3545;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .planner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .planner-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .planner-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .planner-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .planner-form {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .budget-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .budget-slider {
+            flex: 1;
+        }
+
+        .budget-value {
+            min-width: 100px;
+            padding: 0.5rem;
+            background: var(--bg-accent);
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .budget-categories {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .budget-category {
+            flex: 1;
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .budget-category.active, .budget-category:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .places-container {
+            margin-top: 1rem;
+        }
+
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .place-card {
+            background: var(--bg-accent);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .place-card:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .place-card.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .place-checkbox {
+            margin: 0;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .results-section {
+            display: none;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .results-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .itinerary-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .itinerary-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .itinerary-days {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .day-number {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .day-places {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .place-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-accent);
+            border-radius: 8px;
+        }
+
+        .place-icon {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            align-self: flex-start;
+        }
+
+        .place-details {
+            flex: 1;
+        }
+
+        .place-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .place-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .place-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .map-container {
+            height: 500px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+              position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .budget-summary {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(102, 126, 234, 0.3);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .planner-container {
+                padding: 1rem;
+            }
+
+            .planner-form, .results-section {
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-slider-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .back-nav {
+                top: 10px;
+                left: 10px;
+            }
+
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-nav">
+        <a href="features.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+        </a>
+    </div>
+<div class="planner-container">
+        <div class="planner-header">
+            <h1>🧭 Trip Planner</h1>
+            <p>Plan your perfect Uttarakhand journey day by day with our smart trip planner</p>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Generating your personalized trip plan...</p>
+        </div>
+
+        <form class="planner-form" id="tripForm">
+            <!-- Trip Duration Section -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h2 class="section-title">Trip Duration</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" class="form-input" id="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input type="date" class="form-input" id="endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of Days</label>
+                        <input type="text" class="form-input" id="numDays" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destination Details Section -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h2 class="section-title">Destination Details</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Destination / City / Region</label>
+                        <select class="form-select" id="destination" required>
+                            <option value="">Select a destination</option>
+                            <option value="dehradun">Dehradun</option>
+                            <option value="mussoorie">Mussoorie</option>
+                            <option value="rishikesh">Rishikesh</option>
+                            <option value="haridwar">Haridwar</option>
+                            <option value="nainital">Nainital</option>
+                            <option value="almora">Almora</option>
+                            <option value="auli">Auli</option>
+                            <option value="kedarnath">Kedarnath</option>
+                            <option value="badrinath">Badrinath</option>
+                            <option value="joshimath">Joshimath</option>
+                            <option value="chamoli">Chamoli</option>
+                            <option value="uttarkashi">Uttarkashi</option>
+                            <option value="pauri">Pauri</option>
+                            <option value="bageshwar">Bageshwar</option>
+                            <option value="champawat">Champawat</option>
+                            <option value="pithoragarh">Pithoragarh</option>
+                            <option value="tehri">Tehri</option>
+                            <option value="rudraprayag">Rudraprayag</option>
+                            <option value="tanakpur">Tanakpur</option>
+                            <option value="kashipur">Kashipur</option>
+                            <option value="haldwani">Haldwani</option>
+                            <option value="roorkee">Roorkee</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="places-container">
+                    <label class="form-label">Famous Tourist Places (Select to include in your trip)</label>
+                    <div class="places-grid" id="placesGrid">
+                        <!-- Places will be loaded dynamically -->
+                        <div class="place-card">
+                            <input type="checkbox" class="place-checkbox" disabled>
+                            <span>Select a destination to see places</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Details Section -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h2 class="section-title">Travel Details</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Traveling From</label>
+                        <input type="text" class="form-input" id="travelFrom" placeholder="Enter your starting city" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Traveling To</label>
+                        <input type="text" class="form-input" id="travelTo" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Travel Mode</label>
+                        <select class="form-select" id="travelMode">
+                            <option value="car">Car</option>
+                            <option value="bus">Bus</option>
+                            <option value="train">Train</option>
+                            <option value="flight">Flight</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Planning Section -->
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h2 class="section-title">Budget Planning</h2>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Budget (₹)</label>
+                        <div class="budget-slider-container">
+                            <input type="range" class="budget-slider" id="budgetSlider" min="1000" max="100000" step="1000" value="15000">
+                            <input type="number" class="budget-value" id="budgetValue" min="1000" max="100000" value="15000">
+                        </div>
+                        <div class="budget-categories">
+                            <div class="budget-category" data-budget="10000">Low</div>
+                            <div class="budget-category" data-budget="20000">Medium</div>
+                            <div class="budget-category" data-budget="100000">Premium</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-magic"></i>
+                Generate Trip Plan
+            </button>
+        </form>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2 class="results-title">Your Personalized Trip Plan</h2>
+                <button class="btn btn-primary" id="saveTripBtn">
+                    <i class="fas fa-save"></i>
+                    Save Trip
+                </button>
+            </div>
+
+            <div class="itinerary-container">
+                <div class="itinerary-days" id="itineraryDays">
+                    <!-- Itinerary will be loaded dynamically -->
+                </div>
+                <div class="map-section">
+                    <h3><i class="fas fa-map"></i> Route Map</h3>
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="budget-summary">
+                <h3><i class="fas fa-chart-pie"></i> Budget Breakdown</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-value" id="totalBudget">₹0</div>
+                        <div class="summary-label">Total Budget</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="dailyBudget">₹0</div>
+                        <div class="summary-label">Per Day</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="transportCost">₹0</div>
+                        <div class="summary-label">Transport</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="accommodationCost">₹0</div>
+                        <div class="summary-label">Accommodation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-primary" id="editPlanBtn">
+                    <i class="fas fa-edit"></i>
+                    Edit Plan
+                </button>
+                <button class="btn" id="newPlanBtn">
+                    <i class="fas fa-plus"></i>
+                    New Plan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="planner.js"></script>
+    <script>
+        // Initialize the planner
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize date pickers with today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            
+            // Set minimum end date to today
+            document.getElementById('endDate').min = today;
+            
+            // Calculate number of days when dates change
+            document.getElementById('startDate').addEventListener('change', calculateDays);
+            document.getElementById('endDate').addEventListener('change', calculateDays);
+            
+            // Sync budget slider and input
+            const budgetSlider = document.getElementById('budgetSlider');
+            const budgetValue = document.getElementById('budgetValue');
+            
+            budgetSlider.addEventListener('input', function() {
+                budgetValue.value = this.value;
+            });
+            
+            budgetValue.addEventListener('input', function() {
+                budgetSlider.value = this.value;
+            });
+            
+            // Budget category selection
+            document.querySelectorAll('.budget-category').forEach(category => {
+                category.addEventListener('click', function() {
+                    document.querySelectorAll('.budget-category').forEach(cat => {
+                        cat.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    budgetValue.value = this.dataset.budget;
+                    budgetSlider.value = this.dataset.budget;
+                });
+            });
+            
+            // Destination change handler
+            document.getElementById('destination').addEventListener('change', function() {
+                const destination = this.value;
+                if (destination) {
+                    document.getElementById('travelTo').value = destination.charAt(0).toUpperCase() + destination.slice(1);
+                    loadPlacesForDestination(destination);
+                } else {
+                    document.getElementById('travelTo').value = '';
+                    document.getElementById('placesGrid').innerHTML = '<div class="place-card"><input type="checkbox" class="place-checkbox" disabled><span>Select a destination to see places</span></div>';
+                }
+            });
+            
+            // Form submission
+            document.getElementById('tripForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                generateTripPlan();
+            });
+            
+            // Action buttons
+            document.getElementById('editPlanBtn').addEventListener('click', editPlan);
+            document.getElementById('newPlanBtn').addEventListener('click', newPlan);
+            document.getElementById('saveTripBtn').addEventListener('click', saveTrip);
+            
+            // Initialize days calculation
+            calculateDays();
+        });
+        
+        // Calculate number of days between start and end dates
+        function calculateDays() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                // Calculate difference in days
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                
+                document.getElementById('numDays').value = diffDays + ' days';
+            }
+        }
+        
+        // Load places for selected destination
+        function loadPlacesForDestination(destination) {
+            // This would typically fetch from an API or database
+            // For now, we'll use sample data
+            const placesData = {
+                dehradun: [
+                    { name: "Robber's Cave", description: "Natural cave formation with a stream", type: "viewpoint" },
+                    { name: "Sahastradhara", description: "Sulfur spring with therapeutic properties", type: "viewpoint" },
+                    { name: "Mindrolling Monastery", description: "One of the largest Buddhist monasteries", type: "temple" },
+                    { name: "Tapkeshwar Cave", description: "Sacred cave temple dedicated to Lord Shiva", type: "temple" },
+                    { name: "Rajaji National Park", description: "Tiger reserve with diverse wildlife", type: "viewpoint" }
+                ],
+                mussoorie: [
+                    { name: "Lal Tibba", description: "Panoramic views of Himalayan peaks", type: "viewpoint" },
+                    { name: "Gun Hill", description: "Second highest peak in Mussoorie", type: "viewpoint" },
+                    { name: "Kempty Falls", description: "Scenic waterfall 15 km from Mussoorie", type: "waterfall" },
+                    { name: "Camel's Back Road", description: "Scenic road with breathtaking views", type: "viewpoint" }
+                ],
+                rishikesh: [
+                    { name: "Lakshman Jhula", description: "Iconic suspension bridge and temple", type: "temple" },
+                    { name: "Ram Jhula", description: "Suspension bridge over the Ganges", type: "viewpoint" },
+                    { name: "Triveni Ghat", description: "Sacred ghat where three rivers meet", type: "viewpoint" },
+                    { name: "Neelkanth Mahadev Temple", description: "Ancient temple dedicated to Lord Shiva", type: "temple" }
+                ],
+                haridwar: [
+                    { name: "Har Ki Pauri", description: "Sacred ghat on the banks of Ganges", type: "temple" },
+                    { name: "Mansa Devi Temple", description: "Temple dedicated to Goddess Mansa Devi", type: "temple" },
+                    { name: "Chandi Devi Temple", description: "Temple on Neel Parvat with panoramic views", type: "temple" },
+                    { name: "Maya Devi Temple", description: "Ancient temple marking Ganga's descent", type: "temple" }
+                ]
+            };
+            
+            const places = placesData[destination] || [];
+            const placesGrid = document.getElementById('placesGrid');
+            
+            if (places.length > 0) {
+                placesGrid.innerHTML = places.map((place, index) => `
+                    <div class="place-card" data-index="${index}">
+                        <input type="checkbox" class="place-checkbox" id="place${index}" checked>
+                        <div>
+                            <div class="place-name">${place.name}</div>
+                            <div class="place-desc">${place.description}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Add event listeners to place cards
+                document.querySelectorAll('.place-card').forEach(card => {
+                    card.addEventListener('click', function(e) {
+                        if (e.target !== this.querySelector('.place-checkbox')) {
+                            const checkbox = this.querySelector('.place-checkbox');
+                            checkbox.checked = !checkbox.checked;
+                        }
+                    });
+                });
+            } else {
+                placesGrid.innerHTML = '<div class="place-card"><span>No places found for this destination</span></div>';
+            }
+        }
+        
+        // Generate trip plan
+        function generateTripPlan() {
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('resultsSection').style.display = 'none';
+            
+            // Simulate processing time
+            setTimeout(function() {
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+                
+                // Show results
+                document.getElementById('resultsSection').style.display = 'block';
+                
+                // Generate itinerary
+                generateItinerary();
+                
+                // Initialize map
+                initMap();
+                
+                // Update budget summary
+                updateBudgetSummary();
+                
+                // Scroll to results
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        }
+        
+        // Generate itinerary
+        function generateItinerary() {
+            const numDays = parseInt(document.getElementById('numDays').value) || 3;
+            const destination = document.getElementById('destination').value;
+            const destinationName = destination.charAt(0).toUpperCase() + destination.slice(1);
+            
+            const itineraryDays = document.getElementById('itineraryDays');
+            itineraryDays.innerHTML = '';
+            
+            // Sample places data
+            const samplePlaces = [
+                { name: "Morning Visit to Temple", description: "Start your day with spiritual awakening", time: "2 hours", cost: "Free" },
+                { name: "Nature Walk", description: "Explore the beautiful surroundings", time: "3 hours", cost: "Free" },
+                { name: "Lunch at Local Restaurant", description: "Enjoy authentic local cuisine", time: "1.5 hours", cost: "₹500" },
+                { name: "Evening Sightseeing", description: "Visit scenic viewpoints", time: "2 hours", cost: "Free" },
+                { name: "Dinner and Relaxation", description: "End your day with delicious dinner", time: "2 hours", cost: "₹800" }
+            ];
+            
+            for (let day = 1; day <= Math.min(numDays, 5); day++) {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                dayCard.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-number">Day ${day}</div>
+                        <div class="day-destination">${destinationName}</div>
+                    </div>
+                    <div class="day-places">
+                        ${samplePlaces.map(place => `
+                            <div class="place-item">
+                                <div class="place-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="place-details">
+                                    <div class="place-name">${place.name}</div>
+                                    <div class="place-desc">${place.description}</div>
+                                    <div class="place-meta">
+                                        <span><i class="far fa-clock"></i> ${place.time}</span>
+                                        <span><i class="fas fa-rupee-sign"></i> ${place.cost}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                itineraryDays.appendChild(dayCard);
+            }
+        }
+        
+        // Initialize map
+        function initMap() {
+            // This would typically initialize a real map
+            // For now, we'll create a placeholder
+            const mapElement = document.getElementById('map');
+            mapElement.innerHTML = `
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f4f8;">
+                    <div style="text-align:center;color:#667eea;">
+                        <i class="fas fa-map-marked-alt" style="font-size:3rem;margin-bottom:1rem;"></i>
+                        <p>Interactive Map</p>
+                        <p style="font-size:0.9rem;color:#999;">Route visualization will appear here</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Update budget summary
+        function updateBudgetSummary() {
+            const totalBudget = parseInt(document.getElementById('budgetValue').value) || 25000;
+            const numDays = parseInt(document.getElementById('numDays').value) || 3;
+            
+            document.getElementById('totalBudget').textContent = '₹' + totalBudget.toLocaleString();
+            document.getElementById('dailyBudget').textContent = '₹' + Math.round(totalBudget / numDays).toLocaleString();
+            document.getElementById('transportCost').textContent = '₹' + Math.round(totalBudget * 0.3).toLocaleString();
+            document.getElementById('accommodationCost').textContent = '₹' + Math.round(totalBudget * 0.4).toLocaleString();
+        }
+        
+        // Edit plan
+        function editPlan() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('tripForm').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // New plan
+        function newPlan() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('tripForm').reset();
+            document.getElementById('placesGrid').innerHTML = '<div class="place-card"><input type="checkbox" class="place-checkbox" disabled><span>Select a destination to see places</span></div>';
+            calculateDays();
+        }
+        
+        // Save trip
+        function saveTrip() {
+            alert('Trip saved successfully! You can view it in "My Trips" section.');
+        }
+    </script>
+
+
+</body>
+</html>

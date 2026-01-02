@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Weather – Uttarakhand Yatra</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Left Feature Navigation Panel -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-sidebar">
+                <i class="fas fa-mountain"></i>
+                <span>Uttarakhand Yatra</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="features.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>Features</span>
+            </a>
+            <a href="live-weather.html" class="nav-item active">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Live Weather</span>
+            </a>
+            <a href="planner.html" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Trip Planner</span>
+            </a>
+            <a href="TripExpenseSplitter/TripExpenseSplitter-main/index.html" class="nav-item">
+                <i class="fas fa-calculator"></i>
+                <span>Money Splitter</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="sidebar-info">
+                <i class="fas fa-info-circle"></i>
+                <p>Explore Devbhoomi</p>
+            </div>
+        </div>
+    </aside>
+       <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="features.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back 
+            </a>
+        </div>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Right Side Navigation Bar -->
+    <nav class="right-navbar">
+        <a href="index.html" class="nav-item-right">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="features.html" class="nav-item-right">
+            <i class="fas fa-star"></i>
+            <span>Explore</span>
+        </a>
+        <a href="planner.html" class="nav-item-right">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Plan Trip</span>
+        </a>
+        <a href="features.html" class="nav-item-right active">
+            <i class="fas fa-star"></i>
+            <span>Features</span>
+        </a>
+        <a href="index.html#trips-tab" class="nav-item-right">
+            <i class="fas fa-heart"></i>
+            <span>My Trips</span>
+        </a>
+    </nav>
+
+    <div class="main-content-wrapper">
+        <section class="weather-page">
+            <h2>🌦 Live Weather</h2>
+            <p>Check current weather and forecast for any place in Uttarakhand</p>
+
+            <div class="weather-search-container">
+                <div class="search-box">
+                    <input type="text" id="weather-input" placeholder="Search place (e.g. Mussoorie, Rishikesh, Dehradun)">
+                    <button onclick="getWeather()"><i class="fas fa-search"></i> Check Weather</button>
+                </div>
+            </div>
+
+            <div id="weather-result" class="weather-result-container">
+                <div class="placeholder-message">
+                    <i class="fas fa-cloud-sun" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.7;"></i>
+                    <p>Enter a place name above to check the weather</p>
+                    <p class="hint">Try: Mussoorie, Rishikesh, Nainital, Joshimath, Badrinath, Dehradun</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Weather API Key
+        const API_KEY = "e30a69b265af18b382ac876153292377";
+        
+        // Uttarakhand places with coordinates for better accuracy
+        const uttarakhandPlaces = {
+            "dehradun": { lat: 30.3165, lon: 78.0322, displayName: "Dehradun" },
+            "mussoorie": { lat: 30.4598, lon: 78.0644, displayName: "Mussoorie" },
+            "rishikesh": { lat: 30.0869, lon: 78.2676, displayName: "Rishikesh" },
+            "haridwar": { lat: 29.9457, lon: 78.1642, displayName: "Haridwar" },
+            "nainital": { lat: 29.3803, lon: 79.4636, displayName: "Nainital" },
+            "almora": { lat: 29.5854, lon: 79.6584, displayName: "Almora" },
+            "ranikhet": { lat: 29.6382, lon: 79.4490, displayName: "Ranikhet" },
+            "auli": { lat: 30.5500, lon: 79.8000, displayName: "Auli" },
+            "joshimath": { lat: 30.5500, lon: 79.5333, displayName: "Joshimath" },
+            "badrinath": { lat: 30.7433, lon: 79.9083, displayName: "Badrinath" },
+            "kedarnath": { lat: 30.7346, lon: 79.0522, displayName: "Kedarnath" },
+            "uttarkashi": { lat: 30.8827, lon: 78.4543, displayName: "Uttarkashi" },
+            "champawat": { lat: 29.3288, lon: 79.8103, displayName: "Champawat" },
+            "pithoragarh": { lat: 29.5822, lon: 80.2177, displayName: "Pithoragarh" },
+            "tehri": { lat: 30.3972, lon: 78.4747, displayName: "Tehri" },
+            "rudraprayag": { lat: 30.3128, lon: 78.9733, displayName: "Rudraprayag" },
+            "chamoli": { lat: 30.6500, lon: 79.4000, displayName: "Chamoli" },
+            "pauri": { lat: 30.0333, lon: 78.8000, displayName: "Pauri" },
+            "bageshwar": { lat: 29.9333, lon: 79.7667, displayName: "Bageshwar" },
+            "dharchula": { lat: 30.0000, lon: 80.3833, displayName: "Dharchula" }
+        };
+
+        // Real images for popular places in Uttarakhand
+        const placeImages = {
+            "dehradun": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Dehradun_city_view.jpg/800px-Dehradun_city_view.jpg",
+            "mussoorie": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mussoorie_from_Jahaz_Mahal.jpg/800px-Mussoorie_from_Jahaz_Mahal.jpg",
+            "rishikesh": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Laxman_Jhula_Rishikesh.jpg/800px-Laxman_Jhula_Rishikesh.jpg",
+            "haridwar": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Har_Ki_Pauri_Haridwar.jpg/800px-Har_Ki_Pauri_Haridwar.jpg",
+            "nainital": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Nainital_Lake_View.jpg/800px-Nainital_Lake_View.jpg",
+            "almora": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Almora_Hill_Station.jpg/800px-Almora_Hill_Station.jpg",
+            "ranikhet": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ranikhet_Hill_Station.jpg/800px-Ranikhet_Hill_Station.jpg",
+            "auli": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Auli_ski_resort.jpg/800px-Auli_ski_resort.jpg",
+            "joshimath": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Joshimath_town_view.jpg/800px-Joshimath_town_view.jpg",
+            "badrinath": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Badrinath_Temple.jpg/800px-Badrinath_Temple.jpg",
+            "kedarnath": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Kedarnath_Temple.jpg/800px-Kedarnath_Temple.jpg",
+            "default": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Uttarakhand_Himalayas.jpg/800px-Uttarakhand_Himalayas.jpg"
+        };
+
+        function getWeather() {
+            const placeInput = document.getElementById("weather-input").value.trim().toLowerCase();
+            const result = document.getElementById("weather-result");
+            
+            if (!placeInput) {
+                result.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Please enter a place name</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Show loading state
+            result.innerHTML = `
+                <div class="loading-message">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Fetching weather data for ${placeInput}...</p>
+                </div>
+            `;
+
+            // Try to find exact match first
+            let placeData = uttarakhandPlaces[placeInput];
+            let displayName = placeInput.charAt(0).toUpperCase() + placeInput.slice(1);
+            
+            if (!placeData) {
+                // Try partial match
+                const matchedPlace = Object.keys(uttarakhandPlaces).find(key => 
+                    key.includes(placeInput) || placeInput.includes(key)
+                );
+                
+                if (matchedPlace) {
+                    placeData = uttarakhandPlaces[matchedPlace];
+                    displayName = placeData.displayName;
+                }
+            }
+
+            // If we have coordinate data, use it for more accurate results
+            if (placeData) {
+                fetchWeatherByCoordinates(placeData.lat, placeData.lon, displayName, placeInput);
+            } else {
+                // Fallback to city name search
+                fetchWeatherByName(placeInput);
+            }
+        }
+
+        function fetchWeatherByCoordinates(lat, lon, displayName, originalInput) {
+            const result = document.getElementById("weather-result");
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+            
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error('Weather data not available');
+                    return res.json();
+                })
+                .then(data => {
+                    displayWeatherData(data, displayName, originalInput);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    result.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-cloud-showers-heavy"></i>
+                            <p>Unable to fetch weather data for ${displayName}</p>
+                            <p class="small">Please try another nearby location</p>
+                        </div>
+                    `;
+                });
+        }
+
+        function fetchWeatherByName(placeName) {
+            const result = document.getElementById("weather-result");
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(placeName)},IN&units=metric&appid=${API_KEY}`;
+            
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error('Weather data not available');
+                    return res.json();
+                })
+                .then(data => {
+                    // Check if the returned data is actually in Uttarakhand
+                    if (data.sys.country === "IN") {
+                        displayWeatherData(data, data.name, placeName.toLowerCase());
+                    } else {
+                        throw new Error('Location not in India');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    result.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Location "${placeName}" not found in Uttarakhand</p>
+                            <p class="small">Try: Mussoorie, Rishikesh, Nainital, Joshimath, Badrinath, Dehradun</p>
+                        </div>
+                    `;
+                });
+        }
+
+        function displayWeatherData(data, displayName, originalInput) {
+            const result = document.getElementById("weather-result");
+            const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            
+            // Get appropriate image for the place
+            let placeImage = placeImages[originalInput] || placeImages[originalInput.toLowerCase()] || placeImages.default;
+            
+            // If we can't find a specific image, try to get one from Unsplash based on the place
+            if (placeImage === placeImages.default) {
+                placeImage = `https://source.unsplash.com/800x600/?${encodeURIComponent(displayName)},mountains,uttarakhand`;
+            }
+            
+            result.innerHTML = `
+                <div class="weather-card-enhanced">
+                    <div class="weather-header">
+                        <h3>${displayName}, Uttarakhand</h3>
+                        <div class="weather-main">
+                            <img src="${icon}" alt="weather icon" class="weather-icon">
+                            <div class="temp">${Math.round(data.main.temp)}°C</div>
+                        </div>
+                        <p class="weather-description">${data.weather[0].description}</p>
+                    </div>
+                    
+                    <div class="weather-image-container">
+                        <img src="${placeImage}" alt="${displayName}" class="weather-place-image">
+                        <div class="image-overlay">
+                            <i class="fas fa-camera"></i> ${displayName}
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-temperature-high"></i>
+                            <div>
+                                <span class="label">Feels Like</span>
+                                <span class="value">${Math.round(data.main.feels_like)}°C</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <div>
+                                <span class="label">Humidity</span>
+                                <span class="value">${data.main.humidity}%</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <div>
+                                <span class="label">Wind Speed</span>
+                                <span class="value">${data.wind.speed} m/s</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-compress-alt"></i>
+                            <div>
+                                <span class="label">Pressure</span>
+                                <span class="value">${data.main.pressure} hPa</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="forecast-preview">
+                        <h4><i class="fas fa-calendar-day"></i> Extended Forecast</h4>
+                        <p>For detailed forecast, visit a local weather service or use a dedicated weather app.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById("weather-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                getWeather();
+            }
+        });
+
+        // Sidebar Toggle for Mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebarCloseBtn = document.getElementById('sidebarClose');
+            const sidebar = document.getElementById('sidebar');
+
+            if (mobileMenuBtn && sidebarCloseBtn && sidebar) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    sidebar.classList.add('active');
+                });
+
+                sidebarCloseBtn.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                });
+
+                // Close sidebar when clicking outside on mobile
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 1024) {
+                        if (!e.target.closest('.sidebar') && !e.target.closest('.mobile-menu-btn')) {
+                            sidebar.classList.remove('active');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
